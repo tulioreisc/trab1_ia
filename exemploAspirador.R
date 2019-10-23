@@ -1,23 +1,19 @@
-debugSource("Canibais.R")
+debugSource("Aspirador.R")
 debugSource("buscaDesinformada.R")
 debugSource("buscaInformada.R")
 
-inicial <- Canibais(desc = c(M = 3, C = 3, B = 1))
+# Define estado inicial
+inicial <- Aspirador(desc = list(P = c(1,2), A = c(0, 1, 1, 1)))
 
-objetivo <- Canibais()
-objetivo$desc <- c(M = 0, C = 0, B = 0)
+# Define estado objetivo
+objetivo <- Aspirador(desc = list(A = c(0, 0, 0, 0)))
 
-cat("====\tBusca em Largura\t====\n")
-print(unlist(buscaEmLargura(inicial, objetivo)))
-
-cat("====\tBusca em Profundidade\t=====\n")
-print(buscaEmProfundidade(inicial, objetivo))
-
+# Aplicação dos algoritmos
 cat("====\tBusca de Custo Uniforme\t=====\n")
 print(buscaCustoUniforme(inicial, objetivo))
 
 cat("====\tBusca Best-First (Gulosa)\t=====\n")
 print(buscaBestFirst(inicial, objetivo, "Gulosa"))
- 
+
 cat("====\tBusca Best-First (A*)\t=====\n")
 print(buscaBestFirst(inicial, objetivo, "AEstrela"))
