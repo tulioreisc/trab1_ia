@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1571792519648.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "E58BEAF3",
+    "lastKnownWriteTime" : 1571804293,
+    "last_content_update" : 1571804293,
+    "path" : "~/trab1_ia/Aspirador.R",
+    "project_path" : "Aspirador.R",
+    "properties" : {
+        "cursorPosition" : "54,11",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
