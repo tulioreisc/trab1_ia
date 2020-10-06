@@ -13,27 +13,27 @@ Estado <- function(desc=NULL){
   return(e)
 }
 
-## Sobrecarregando o operador "==" para comparação entre estados
+# Sobrecarregando o operador "==" para comparação entre estados
 Ops.Estado = function(obj1,obj2){
   if(.Generic == "=="){
     return(all(obj1$desc == obj2$desc))
   }
 }
 
-## Sobrecarga da função genérica print
+# Sobrecarga da função genérica print
 print.Estado <- function(obj){
   cat(obj$desc, "\n")
   cat(obj$g, "\n")
   cat(obj$h, "\n")
 }
 
-## Criação do método genérico "heuristica"
+# Criação do método genérico "heuristica"
 heuristica <- function(atual, ...) {
   UseMethod("heuristica")
 }
 
-## Função padrão para o método genérico "heuristica"
-## Deve ser implementada para o problema específico
+# Função padrão para o método genérico "heuristica"
+# Deve ser implementada para o problema específico
 heuristica.default <- function(atual, ...) {
   print("Funcao Generica. Defina a heuristica para o seu problema!\n")
   return(NULL)

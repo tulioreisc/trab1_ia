@@ -1,3 +1,4 @@
+# função busca em largura
 buscaEmLargura <- function(inicial, objetivo){
   
   abertos <- list(inicial)
@@ -12,12 +13,13 @@ buscaEmLargura <- function(inicial, objetivo){
       filhos <- geraFilhos(atual)
       fechados <- c(fechados, atual)
       filhos <- removeRepetidos(filhos, c(abertos, fechados))
-      abertos <- c(abertos, filhos) ## filhos têm prioridade menor! 
+      abertos <- c(abertos, filhos) # filhos têm prioridade menor! 
     }
   }
   return("Busca falhou! :'-(")
 }
 
+# função busca em profundidade
 buscaEmProfundidade <- function(inicial, objetivo){
   
   abertos <- list(inicial)
@@ -32,12 +34,13 @@ buscaEmProfundidade <- function(inicial, objetivo){
       filhos <- geraFilhos(atual)
       fechados <- c(fechados, atual)
       filhos <- removeRepetidos(filhos, c(abertos, fechados))
-      abertos <- c(filhos, abertos) ## filhos têm prioridade maior!
+      abertos <- c(filhos, abertos) # filhos têm prioridade maior!
     }
   }
   return("Busca falhou! :'-(")
 }
 
+# busca custo uniforme
 buscaCustoUniforme <- function(inicial, objetivo){
   
   abertos <- list(inicial)
@@ -52,8 +55,8 @@ buscaCustoUniforme <- function(inicial, objetivo){
       filhos <- geraFilhos(atual)
       fechados <- c(fechados, atual)
       filhosNovos <- removeRepetidos(filhos, c(abertos, fechados)) 
-      ## se gera filhos que aparecem em abertos, atualiza o valor de custo
-      ## abertos devem estar ordenados por menor custo
+      # se gera filhos que aparecem em abertos, atualiza o valor de custo
+      # abertos devem estar ordenados por menor custo
       abertos <- ordenaPorCusto(c(atualizaAbertos(abertos, filhos),filhosNovos))
     }
   }
@@ -72,12 +75,13 @@ recuperaCaminho <- function(atual){
   return(rev(caminho))
 }
 
+# funcao remove repetidos
 removeRepetidos <- function(filhos, gerados){
   
-  ## pega descrições dos estados já gerados
+  # pega descrições dos estados já gerados
   gDesc <- lapply(gerados, function(gerado) gerado$desc)
   
-  ## verifica se filhos não aparece em estados gerados
+  # verifica se filhos não aparece em estados gerados
   fNovos <- sapply(filhos, function(filho) !is.element(list(filho$desc), gDesc))
   
   filhos <- filhos[fNovos]
@@ -85,17 +89,18 @@ removeRepetidos <- function(filhos, gerados){
   return(filhos)
 }
 
+# funcao atualiza abertos
 atualizaAbertos <- function(abertos, filhos){
   
-  ## pega descrições dos estados na lista de abertos
+  # pega descrições dos estados na lista de abertos
   aDesc <- lapply(abertos, function(aberto) aberto$desc)
   
-  ## verifica se filhos aparece em estados da lista de abertos
+  # verifica se filhos aparece em estados da lista de abertos
   fEmAbertos <- sapply(filhos, function(filho) is.element(list(filho$desc), aDesc))
   
   if(any(fEmAbertos)){ ## se existe ao menos um filho que já aparece na lista de abertos
     
-    ## recupera apenas os filhos que aparecem na lista de abertos
+    # recupera apenas os filhos que aparecem na lista de abertos
     filhosAbertos <- filhos[fEmAbertos]
     
     fADesc <- lapply(filhosAbertos, function(filhoAberto) filhoAberto$desc)
@@ -126,6 +131,7 @@ atualizaAbertos <- function(abertos, filhos){
   return(abertos)
 }
 
+# funcao ordenar por custo
 ordenaPorCusto <- function(abertos){
   
   aCusto <- t(as.data.frame(lapply(abertos, function(aberto) aberto$g)))

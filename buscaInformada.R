@@ -11,20 +11,20 @@ buscaBestFirst <- function(inicial, objetivo, abordagem = "AEstrela"){
     }else {
       filhos <- geraFilhos(atual)
       filhos <- atualizaAvaliacao(filhos, abordagem)
-      filhosNovos <- novosGerados(filhos, c(abertos, fechados)) ## gerados pela primeira vez
-      filhosAbertos <- geradosAntes(filhos, abertos) ## filhos que já aparecem na lista de abertos
+      filhosNovos <- novosGerados(filhos, c(abertos, fechados)) # gerados pela primeira vez
+      filhosAbertos <- geradosAntes(filhos, abertos) # filhos que já aparecem na lista de abertos
       abertos <- c(filhosNovos, filhosAbertos[[1]])
       if(length(fechados) > 0){
-        filhosFechados <- geradosAntes(filhos, fechados, lista = "fechados") ## filhos que já aparecem na lista de fechados
+        filhosFechados <- geradosAntes(filhos, fechados, lista = "fechados") # filhos que já aparecem na lista de fechados
         fechados <- filhosFechados[[1]]
-        ## atualização da lista abertos: 
-        ##      filhos gerados pela 1a vez + 
-        ##      já gerados e atualizados na lista de abertos +
-        ##      já gerados e fechados, mas reabertos
+        # atualização da lista abertos: 
+        #      filhos gerados pela 1a vez + 
+        #      já gerados e atualizados na lista de abertos +
+        #      já gerados e fechados, mas reabertos
         abertos <- c(abertos, filhosFechados[[2]])
       }
       abertos <- ordenaPorAvaliacao(abertos)
-      ## inclui estado atual na lista de fechados
+      # inclui estado atual na lista de fechados
       fechados <- c(fechados, atual)
     }
   }
